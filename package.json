@@ -1,0 +1,23 @@
+{
+  "name": "plugin-external-transfer",
+  "version": "10.0.2",
+  "private": true,
+  "scripts": {
+    "postinstall": "flex-plugin pre-script-check"
+  },
+  "dependencies": {
+    "@emotion/core": "^10.0.28",
+    "@emotion/styled": "^11.3.0",
+    "flex-plugin-scripts": "4.2.0",
+    "lodash": "^4.17.21",
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1",
+    "react-select": "^5.1.0",
+    "axios": "^0.22.0"
+  },
+  "devDependencies": {
+    "@material-ui/core": "^4.12.3",
+    "@twilio/flex-ui": "^1",
+    "react-test-renderer": "^16.13.1"
+  }
+}
