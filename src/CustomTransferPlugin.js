@@ -1,15 +1,15 @@
-import { FlexPlugin } from 'flex-plugin';
+import { FlexPlugin } from 'flex-plugin'
 
 import registerCustomActions from './customActions'
 import { loadExternalTransferInterface } from './components/ExternalTransfer'
 import { loadInternalCallInterface } from './components/InternalCall'
 import { loadCustomDirectoryInterface } from './components/CustomDirectory'
 
-const PLUGIN_NAME = 'CustomTransferPlugin';
+const PLUGIN_NAME = 'CustomTransferPlugin'
 
 export default class CustomTransferPlugin extends FlexPlugin {
-  constructor() {
-    super(PLUGIN_NAME);
+  constructor () {
+    super(PLUGIN_NAME)
   }
 
   /**
@@ -19,9 +19,9 @@ export default class CustomTransferPlugin extends FlexPlugin {
    * @param flex { typeof import('@twilio/flex-ui') }
    * @param manager { import('@twilio/flex-ui').Manager }
    */
-  async init(flex, manager) {
+  async init (flex, manager) {
     loadExternalTransferInterface.bind(this)(flex, manager)
-    loadInternalCallInterface.bind(this)(flex, manager)
+    // loadInternalCallInterface.bind(this)(flex, manager)
     loadCustomDirectoryInterface.bind(this)(flex, manager)
     registerCustomActions(manager)
   }
