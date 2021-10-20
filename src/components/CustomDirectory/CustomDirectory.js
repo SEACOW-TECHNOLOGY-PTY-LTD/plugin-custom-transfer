@@ -95,7 +95,7 @@ class CustomDirectory extends React.Component {
     let participantCallSid
     try {
       participantCallSid = await ConferenceService.addParticipant(taskSid,
-        '+61255054056', to)
+        '+61287902720', to)
       ConferenceService.addConnectingParticipant(conferenceSid,
         participantCallSid, 'unknown')
     } catch (error) {

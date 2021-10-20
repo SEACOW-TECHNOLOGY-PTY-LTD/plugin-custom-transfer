@@ -54,7 +54,7 @@ class ConferenceDialog extends React.Component {
       to = `+61${to}`
     }
 
-    to = 'sip:' + to + '@img-aiahealth.twilio.colouredlines.net.au;edge=sydney'
+    to = 'sip:' + to + '@sbc.vlogic.com.au'
 
     const { task } = this.props
     const conference = task && (task.conference || {})
