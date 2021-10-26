@@ -4,10 +4,13 @@ import registerCustomActions from './customActions'
 import { loadExternalTransferInterface } from './components/ExternalTransfer'
 import { loadInternalCallInterface } from './components/InternalCall'
 import { loadCustomDirectoryInterface } from './components/CustomDirectory'
+import {loadUpdateDidInterface} from "./components/UpdateDid";
+import {loadPlayAnnouncementInterface} from "./components/PlayAnnouncement";
+import React from "react";
 
-const PLUGIN_NAME = 'CustomTransferPlugin'
+const PLUGIN_NAME = 'CustomVoicePlugin'
 
-export default class CustomTransferPlugin extends FlexPlugin {
+export default class CustomVoicePlugin extends FlexPlugin {
   constructor () {
     super(PLUGIN_NAME)
   }
@@ -21,8 +24,11 @@ export default class CustomTransferPlugin extends FlexPlugin {
    */
   async init (flex, manager) {
     loadExternalTransferInterface.bind(this)(flex, manager)
-    // loadInternalCallInterface.bind(this)(flex, manager)
     loadCustomDirectoryInterface.bind(this)(flex, manager)
+    loadPlayAnnouncementInterface.bind(this)(flex, manager)
+
+    // loadInternalCallInterface.bind(this)(flex, manager)
+    // loadUpdateDidInterface.bind(this)(flex, manager)
     registerCustomActions(manager)
   }
 }

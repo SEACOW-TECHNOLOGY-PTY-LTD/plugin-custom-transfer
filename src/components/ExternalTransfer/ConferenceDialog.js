@@ -54,7 +54,7 @@ class ConferenceDialog extends React.Component {
       to = `+61${to}`
     }
 
-    to = 'sip:' + to + '@sbc.vlogic.com.au'
+    // to = 'sip:' + to + '@sbc.vlogic.com.au'
 
     const { task } = this.props
     const conference = task && (task.conference || {})
@@ -131,6 +131,7 @@ const mapStateToProps = state => {
   const conferenceDialogState = componentViewStates &&
     componentViewStates.ConferenceDialog
   const isOpen = conferenceDialogState && conferenceDialogState.isOpen
+  console.log('state:', state)
   return {
     isOpen,
     phoneNumber: state.flex.worker.attributes.phone,

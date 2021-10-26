@@ -12,9 +12,14 @@ import {
 import { post } from '../../utils/api'
 
 class CustomDirectory extends React.Component {
-  state = {
-    searchTerm: '',
+  constructor(props) {
+    super(props);
+    this.state = {
+      searchTerm: '',
+    }
+    this.onSearchInputChange = this.onSearchInputChange.bind(this)
   }
+
 
   /**
    * Builtin React Component Method that gets run whenever this component
@@ -95,7 +100,7 @@ class CustomDirectory extends React.Component {
     let participantCallSid
     try {
       participantCallSid = await ConferenceService.addParticipant(taskSid,
-        '+61287902720', to)
+        '+61238199220', to)
       ConferenceService.addConnectingParticipant(conferenceSid,
         participantCallSid, 'unknown')
     } catch (error) {
@@ -137,6 +142,15 @@ class CustomDirectory extends React.Component {
           className="Twilio-WorkerDirectory-Workers"
           vertical
         >
+          <DirectoryItem
+            item={{
+              sid: 'test001',
+              fullName: 'Ran Tao',
+              phone: '+61429486670',
+            }}
+            key={'test001'}
+            onTransferClick={this.onTransferClick.bind(this)}
+          />
           {this.state.directoryEntries.map(item => {
             return (
               <DirectoryItem
