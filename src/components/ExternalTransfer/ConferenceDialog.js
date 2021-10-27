@@ -12,6 +12,34 @@ import ConferenceService from '../../helpers/ConferenceService'
 class ConferenceDialog extends React.Component {
   state = {
     conferenceTo: '',
+    invalid : true
+  }
+
+  validateNumber = (num) => {
+    if (num.includes('+61')) {
+      if (num.length === 12){
+        this.setState({
+          invalid: false
+        })
+      } else {
+        this.setState({
+          invalid: true
+        })
+      }
+      return
+    }
+    if (num[0] === '0') {
+      num = num.slice(1)
+    }
+    if (num.length === 9) {
+      this.setState({
+        invalid: false
+      })
+    } else {
+      this.setState({
+        invalid: true
+      })
+    }
   }
 
   handleClose = () => {
@@ -37,6 +65,7 @@ class ConferenceDialog extends React.Component {
   handleChange = e => {
     const value = e.target.value
     this.setState({ conferenceTo: value })
+    this.validateNumber(value)
   }
 
   handleDialButton = () => {
@@ -111,6 +140,7 @@ class ConferenceDialog extends React.Component {
           <Button
             onClick={this.handleDialButton}
             color="primary"
+            disabled={this.state.invalid}
           >
             {Manager.getInstance().strings.DIALPADExternalTransferPhoneNumberPopupDial}
           </Button>
