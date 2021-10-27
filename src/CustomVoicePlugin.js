@@ -7,6 +7,7 @@ import { loadCustomDirectoryInterface } from './components/CustomDirectory'
 import {loadUpdateDidInterface} from "./components/UpdateDid";
 import {loadPlayAnnouncementInterface} from "./components/PlayAnnouncement";
 import React from "react";
+import {loadRecordingControlInterface} from "./components/RecordingControl";
 
 const PLUGIN_NAME = 'CustomVoicePlugin'
 
@@ -26,6 +27,7 @@ export default class CustomVoicePlugin extends FlexPlugin {
     loadExternalTransferInterface.bind(this)(flex, manager)
     loadCustomDirectoryInterface.bind(this)(flex, manager)
     loadPlayAnnouncementInterface.bind(this)(flex, manager)
+    loadRecordingControlInterface.bind(this)(flex, manager)
 
     // loadInternalCallInterface.bind(this)(flex, manager)
     // loadUpdateDidInterface.bind(this)(flex, manager)

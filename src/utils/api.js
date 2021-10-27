@@ -3,7 +3,7 @@ import { Manager } from '@twilio/flex-ui'
 
 const instance = axios.create({
   timeout: 10000,
-  baseURL: `${process.env.REACT_APP_SERVICE_BASE_URL}`,
+  baseURL: `${process.env.REACT_APP_SERVICE_TRANSFER_BASE_URL}`,
 })
 
 instance.defaults.headers.post['Content-Type'] = 'application/json'

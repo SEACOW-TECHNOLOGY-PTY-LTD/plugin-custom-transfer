@@ -3,7 +3,7 @@ import CustomDirectory from './CustomDirectory'
 
 export const loadCustomDirectoryInterface = (flex, manager) => {
   const PluginConfig = {
-    runtimeDomain: process.env.REACT_APP_SERVICE_BASE_URL,
+    runtimeDomain: process.env.REACT_APP_SERVICE_TRANSFER_BASE_URL,
   }
 
   flex.WorkerDirectory.Tabs.Content.add(
