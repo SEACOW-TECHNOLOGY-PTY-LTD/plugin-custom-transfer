@@ -94,83 +94,83 @@ export const loadRecordingControlInterface = (flex, manager) => {
 
     flex.Actions.addListener("afterHangupCall", async (payload) => {
         console.log('afterHangupCall:', payload)
-        const callSid = payload.task.attributes.call_sid;
+        // const callSid = payload.task.attributes.call_sid;
         const taskChannelUniqueName = payload.task.taskChannelUniqueName;
-        const direction = payload.task.attributes.direction;
-        const taskStatus = payload.task.taskStatus;
-        const conferenceSid = payload.task.attributes.conference.sid;
+        // const direction = payload.task.attributes.direction;
+        // const taskStatus = payload.task.taskStatus;
+        // const conferenceSid = payload.task.attributes.conference.sid;
 
         // console.log("heb:", taskChannelUniqueName, direction, taskStatus)
         if (taskChannelUniqueName != 'voice') {
             return
         }
 
-        async function CheckLeave(conferenceSid, callSid) {
-            const url = `${process.env.REACT_APP_SERVICE_BASE_URL}/leave`
-            const body = {
-                Token: manager.store.getState().flex.session.ssoTokenPayload.token,
-                conferenceSid,
-                callSid
-            };
-            const options = {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8'
-                },
-                body: new URLSearchParams(body)
-            };
+        // async function CheckLeave(conferenceSid, callSid) {
+        //     const url = `${process.env.REACT_APP_SERVICE_BASE_URL}/leave`
+        //     const body = {
+        //         Token: manager.store.getState().flex.session.ssoTokenPayload.token,
+        //         conferenceSid,
+        //         callSid
+        //     };
+        //     const options = {
+        //         method: 'POST',
+        //         headers: {
+        //             'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8'
+        //         },
+        //         body: new URLSearchParams(body)
+        //     };
+        //
+        //     return new Promise(async (resolve, reject) => {
+        //         const response = await fetch(url, options);
+        //         if (response.ok) {
+        //             const data = await response.json();
+        //             resolve(data)
+        //
+        //             console.log("rejected stop recording")
+        //             insert('Recording Control', {
+        //                 operation: 'Stop Recording',
+        //                 result: 'Success',
+        //                 errorMessage: '',
+        //                 recordingSid: '',
+        //                 recordingUrl: '',
+        //                 from: payload.task.attributes.from || '',
+        //                 to: getTo(payload.task),
+        //                 direction: payload.task.attributes.direction || '',
+        //                 taskSid: payload.task.taskSid || '',
+        //                 callSid: callSid || '',
+        //                 queueName: payload.task.queueName || ''
+        //             });
+        //         } else {
+        //             reject()
+        //         }
+        //     })
+        // }
 
-            return new Promise(async (resolve, reject) => {
-                const response = await fetch(url, options);
-                if (response.ok) {
-                    const data = await response.json();
-                    resolve(data)
-
-                    console.log("rejected stop recording")
-                    insert('Recording Control', {
-                        operation: 'Stop Recording',
-                        result: 'Success',
-                        errorMessage: '',
-                        recordingSid: '',
-                        recordingUrl: '',
-                        from: payload.task.attributes.from || '',
-                        to: getTo(payload.task),
-                        direction: payload.task.attributes.direction || '',
-                        taskSid: payload.task.taskSid || '',
-                        callSid: callSid || '',
-                        queueName: payload.task.queueName || ''
-                    });
-                } else {
-                    reject()
-                }
-            })
-        }
-
-        async function getData(callSid) {
-            const url = `${process.env.REACT_APP_SERVICE_BASE_URL}/fetch`
-            const body = {
-                Token: manager.store.getState().flex.session.ssoTokenPayload.token,
-                callSid
-            };
-            const options = {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8'
-                },
-                body: new URLSearchParams(body)
-            };
-
-            return new Promise(async (resolve, reject) => {
-                const response = await fetch(url, options);
-                if (response.ok) {
-                    const data = await response.json();
-                    resolve(data)
-                } else {
-                    reject()
-                }
-            })
-        }
-
-        await CheckLeave(conferenceSid, callSid);
+        // async function getData(callSid) {
+        //     const url = `${process.env.REACT_APP_SERVICE_BASE_URL}/fetch`
+        //     const body = {
+        //         Token: manager.store.getState().flex.session.ssoTokenPayload.token,
+        //         callSid
+        //     };
+        //     const options = {
+        //         method: 'POST',
+        //         headers: {
+        //             'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8'
+        //         },
+        //         body: new URLSearchParams(body)
+        //     };
+        //
+        //     return new Promise(async (resolve, reject) => {
+        //         const response = await fetch(url, options);
+        //         if (response.ok) {
+        //             const data = await response.json();
+        //             resolve(data)
+        //         } else {
+        //             reject()
+        //         }
+        //     })
+        // }
+        //
+        // await CheckLeave(conferenceSid, callSid);
     });
 }

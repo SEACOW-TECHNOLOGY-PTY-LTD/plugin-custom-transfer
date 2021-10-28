@@ -23,8 +23,11 @@ const NameListItem = styled('div')`
 `
 
 class ParticipantName extends React.Component {
-  state = {
-    name: '',
+  constructor(props) {
+    super(props);
+    this.state = {
+      name: '',
+    }
   }
 
   componentDidMount () {
@@ -56,11 +59,11 @@ class ParticipantName extends React.Component {
     return this.props.listMode
       ? (
         <NameListItem className="ParticipantCanvas-Name">
-          {this.state.name.includes('sip') ? this.state.name.split('@')[0].split(':')[1] : this.state.name}
+          {this.state.name && this.state.name.includes('sip') ? this.state.name.split('@')[0].split(':')[1] : this.state.name}
         </NameListItem>
       ) : (
         <Name className="ParticipantCanvas-Name">
-          {this.state.name.includes('sip') ? this.state.name.split('@')[0].split(':')[1] : this.state.name}
+          {this.state.name && this.state.name.includes('sip') ? this.state.name.split('@')[0].split(':')[1] : this.state.name}
         </Name>
       )
   }

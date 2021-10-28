@@ -1,15 +1,4 @@
 export const loadUpdateDidInterface = (flex, manager) => {
-    const Name = styled('div')
-        `
-        font-size: 14px;
-        font-weight: bold;
-        margin-top: 10px;
-        margin-bottom: 4px;
-        white-space: nowrap;
-        overflow: hidden;
-        text-overflow: ellipsis;
-      `
-
     flex.Actions.addListener('beforeStartOutboundCall', (payload) => {
         payload.taskAttributes = payload.taskAttributes || {}
         payload.taskAttributes.name = payload.destination
@@ -42,9 +31,9 @@ export const loadUpdateDidInterface = (flex, manager) => {
                 const destination = payload.destination
                 // sip:{phone number}@img-aiahealth.twilio.colouredlines.net.au;edge=sydney
                 console.log('number to call: ', 'sip:' + payload.destination +
-                    '@sbc.vlogic.com.au')
+                    '@img-aiahealth-staging.twilio.colouredlines.net.au;edge=sydney')
                 payload.destination = 'sip:' + payload.destination +
-                    '@sbc.vlogic.com.au'
+                    '@img-aiahealth-staging.twilio.colouredlines.net.au;edge=sydney'
                 payload.callerId = mapping.callerId
 
                 if (payload.callerId) {

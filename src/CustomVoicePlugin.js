@@ -28,9 +28,9 @@ export default class CustomVoicePlugin extends FlexPlugin {
     loadCustomDirectoryInterface.bind(this)(flex, manager)
     loadPlayAnnouncementInterface.bind(this)(flex, manager)
     loadRecordingControlInterface.bind(this)(flex, manager)
+    loadUpdateDidInterface.bind(this)(flex, manager)
 
     // loadInternalCallInterface.bind(this)(flex, manager)
-    // loadUpdateDidInterface.bind(this)(flex, manager)
     registerCustomActions(manager)
   }
 }
