@@ -8,7 +8,10 @@ import DialogContent from '@material-ui/core/DialogContent'
 import DialogContentText from '@material-ui/core/DialogContentText'
 import TextField from '@material-ui/core/TextField'
 import ConferenceService from '../../helpers/ConferenceService'
-
+import axios from "axios";
+import PhoneInput from 'react-phone-number-input/input'
+import 'react-phone-number-input/style.css'
+import CustomPhoneNumber from './PhoneNumber'
 class ConferenceDialog extends React.Component {
   state = {
     conferenceTo: '',
@@ -16,30 +19,14 @@ class ConferenceDialog extends React.Component {
   }
 
   validateNumber = (num) => {
-    if (num.includes('+61')) {
-      if (num.length === 12){
+    axios.post(`https://common-4659-dev.twil.io/validatePhoneNumber`,
+        {
+          phone:num,
+        }).then(res => {
         this.setState({
-          invalid: false
+          invalid : !res.data.success
         })
-      } else {
-        this.setState({
-          invalid: true
-        })
-      }
-      return
-    }
-    if (num[0] === '0') {
-      num = num.slice(1)
-    }
-    if (num.length === 9) {
-      this.setState({
-        invalid: false
-      })
-    } else {
-      this.setState({
-        invalid: true
-      })
-    }
+    })
   }
 
   handleClose = () => {
@@ -63,7 +50,7 @@ class ConferenceDialog extends React.Component {
   }
 
   handleChange = e => {
-    const value = e.target.value
+    const value = e
     this.setState({ conferenceTo: value })
     this.validateNumber(value)
   }
@@ -125,16 +112,23 @@ class ConferenceDialog extends React.Component {
           <DialogContentText>
             {Manager.getInstance().strings.DIALPADExternalTransferPhoneNumberPopupHeader}
           </DialogContentText>
-          <TextField
-            autoFocus
-            margin="dense"
-            id="conferenceNumber"
-            label={Manager.getInstance().strings.DIALPADExternalTransferPhoneNumberPopupTitle}
-            fullWidth
-            value={this.state.conferenceTo}
-            onKeyPress={this.handleKeyPress}
-            onChange={this.handleChange}
+          <PhoneInput
+              country="AU"
+              withCountryCallingCode={true}
+              value={this.state.conferenceTo}
+              onChange={this.handleChange}
+              inputComponent={CustomPhoneNumber}
           />
+          {/*<TextField*/}
+          {/*  autoFocus*/}
+          {/*  margin="dense"*/}
+          {/*  id="conferenceNumber"*/}
+          {/*  label={Manager.getInstance().strings.DIALPADExternalTransferPhoneNumberPopupTitle}*/}
+          {/*  fullWidth*/}
+          {/*  value={this.state.conferenceTo}*/}
+          {/*  onKeyPress={this.handleKeyPress}*/}
+          {/*  onChange={this.handleChange}*/}
+          {/*/>*/}
         </DialogContent>
         <DialogActions>
           <Button

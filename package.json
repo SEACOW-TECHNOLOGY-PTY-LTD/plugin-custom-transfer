@@ -1,6 +1,6 @@
 {
   "name": "plugin-voice",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "private": true,
   "scripts": {
     "postinstall": "flex-plugin pre-script-check"
@@ -8,12 +8,13 @@
   "dependencies": {
     "@emotion/core": "^10.0.28",
     "@emotion/styled": "^11.3.0",
+    "axios": "^0.22.0",
     "flex-plugin-scripts": "4.2.0",
     "lodash": "^4.17.21",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
-    "react-select": "^5.1.0",
-    "axios": "^0.22.0"
+    "react-phone-number-input": "^3.1.35",
+    "react-select": "^5.1.0"
   },
   "devDependencies": {
     "@material-ui/core": "^4.12.3",
