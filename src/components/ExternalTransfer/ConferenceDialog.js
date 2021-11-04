@@ -12,6 +12,7 @@ import axios from "axios";
 import PhoneInput from 'react-phone-number-input/input'
 import 'react-phone-number-input/style.css'
 import CustomPhoneNumber from './PhoneNumber'
+import PhoneField from "./PhoneField/PhoneField";
 class ConferenceDialog extends React.Component {
   state = {
     conferenceTo: '',
@@ -61,13 +62,15 @@ class ConferenceDialog extends React.Component {
   }
 
   addConferenceParticipant = async () => {
-    let to = this.state.conferenceTo
+    let phoneNumber = this.state.conferenceTo
 
-    if (!to.includes('+61')) {
-      if (to[0] === '0') {
-        to = to.slice(1)
-      }
-      to = `+61${to}`
+    if (phoneNumber && phoneNumber.length > 0 && phoneNumber.charAt(2) ===
+        '0') {
+      phoneNumber = `+61${phoneNumber.slice(3)}`;
+    } else if (phoneNumber && phoneNumber.length > 0 &&
+        phoneNumber.charAt(2) !==
+        '0') {
+      phoneNumber = `+${phoneNumber}`;
     }
 
     // to = 'sip:' + to + '@sbc.vlogic.com.au'
@@ -81,18 +84,18 @@ class ConferenceDialog extends React.Component {
 
     let from
     if (this.props.phoneNumber) {
-      from = this.props.phoneNumber
+      from = task.attributes.to
     } else {
       from = Manager.getInstance().serviceConfiguration.outbound_call_flows.default.caller_id
     }
 
     // Adding entered number to the conference
-    console.log(`Adding ${to} to conference`)
+    console.log(`Adding ${phoneNumber} to conference`)
     let participantCallSid
     try {
 
       participantCallSid = await ConferenceService.addParticipant(
-        mainConferenceSid, from, to)
+        mainConferenceSid, from, phoneNumber)
       ConferenceService.addConnectingParticipant(mainConferenceSid,
         participantCallSid, 'unknown')
 
@@ -112,13 +115,22 @@ class ConferenceDialog extends React.Component {
           <DialogContentText>
             {Manager.getInstance().strings.DIALPADExternalTransferPhoneNumberPopupHeader}
           </DialogContentText>
-          <PhoneInput
-              country="AU"
-              withCountryCallingCode={true}
-              value={this.state.conferenceTo}
-              onChange={this.handleChange}
-              inputComponent={CustomPhoneNumber}
+          <PhoneField id="phoneNumber"
+                      value={this.state.conferenceTo}
+                      defaultCountry={'au'}
+                      inputProps={{
+                        variant: 'outlined',
+                        required: true,
+                      }}
+                      onChange={this.handleChange}
           />
+          {/*<PhoneInput*/}
+          {/*    country="AU"*/}
+          {/*    withCountryCallingCode={true}*/}
+          {/*    value={this.state.conferenceTo}*/}
+          {/*    onChange={this.handleChange}*/}
+          {/*    inputComponent={CustomPhoneNumber}*/}
+          {/*/>*/}
           {/*<TextField*/}
           {/*  autoFocus*/}
           {/*  margin="dense"*/}
