@@ -20,14 +20,20 @@ class ConferenceDialog extends React.Component {
   }
 
   validateNumber = (num) => {
-    axios.post(`https://common-4659-dev.twil.io/validatePhoneNumber`,
-        {
-          phone:num,
-        }).then(res => {
+    if (num.length > 10) {
+      axios.post(`https://common-4659-dev.twil.io/validatePhoneNumber`,
+          {
+            phone:num,
+          }).then(res => {
         this.setState({
           invalid : !res.data.success
         })
-    })
+      })
+    } else {
+      this.setState({
+        invalid : true
+      })
+    }
   }
 
   handleClose = () => {
