@@ -1,3 +1,5 @@
+import AgentNumber from "./AgentNumber/AgentNumber";
+
 export const loadUpdateDidInterface = (flex, manager) => {
     flex.Actions.addListener('beforeStartOutboundCall', (payload) => {
         payload.taskAttributes = payload.taskAttributes || {}
@@ -7,6 +9,19 @@ export const loadUpdateDidInterface = (flex, manager) => {
                 'sip:', '').split('@')[0]
         }
     })
+
+    flex.MainHeader.Content.add(<AgentNumber
+            key='navbar-agent-number'
+            phoneNumber={ manager.workerClient.attributes.phone }/>,{
+            sortOrder:-1,
+            align:'end'
+        }
+    )
+
+    flex.Dialpad.Content.add(<AgentNumber
+        key='dailpad-agent-number'
+        phoneNumber={ manager.workerClient.attributes.phone }/>
+    )
 
     manager.strings.TaskLineOutboundCallHeader = '{{task.attributes.name}}'
 
